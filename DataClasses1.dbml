@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CafeInfo" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UHLJDE3;Initial Catalog=CafeInfo;Integrated Security=True" SettingsObjectName="QuanLiQuanCafe.Properties.Settings" SettingsPropertyName="CafeInfoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CafeInfo" Member="CafeInfos">
+    <Type Name="CafeInfo">
+      <Column Name="ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cafeType" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="cafeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cafePrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cafeAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cafeNote" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="cafeTaste" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="cafeModify" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
