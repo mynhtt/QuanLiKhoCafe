@@ -28,17 +28,18 @@ namespace QuanLiQuanCafe
             {
                 if (txbUserName.Text == "admin" && txbPassword.Text == "Admin1234")
                 {
-                    MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK);
+                    MessageBox.Show("Đăng nhập thành công", "Thông báo");
                     this.Close();
                     Form fMain = new frmMain();
                     fMain.Activate();
-                    new frmHome().Activate();
+                    new frmProducts().Activate();
                 }
                 else
                 {
                     MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai", "Thông báo", MessageBoxButtons.OK);
                     txbPassword.Text = "";
                     txbUserName.Text = "";
+                    txbUserName.Focus();
                 }
             }
             else
@@ -46,6 +47,7 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin đăng nhập!", "Thông báo");
                 txbPassword.Text = "";
                 txbUserName.Text = "";
+                txbUserName.Focus();
             }
         }
 

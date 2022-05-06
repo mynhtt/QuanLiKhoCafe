@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace QuanLiQuanCafe
 {
-    public partial class FrmChiTietSanPham : Form
+    public partial class frmTaoHoaDon : Form
     {
-        public FrmChiTietSanPham()
+        public frmTaoHoaDon()
         {
             InitializeComponent();
         }
-
-        
     }
 }

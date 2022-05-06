@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
-using BUS;
+using DTO_QuanLiKhoCafe;
+using BUS_QuanLiKhoCafe;
 
 namespace QuanLiQuanCafe
 {
@@ -25,6 +26,10 @@ namespace QuanLiQuanCafe
 
         private void frmIn_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'db_QuanLyKhoCaPheDataSet.DonDatHang' table. You can move, or remove it, as needed.
+            this.donDatHangTableAdapter.Fill(this.db_QuanLyKhoCaPheDataSet.DonDatHang);
+            // TODO: This line of code loads data into the 'db_QuanLyKhoCaPheDataSet.ChiTietHoaDon' table. You can move, or remove it, as needed.
+            this.chiTietHoaDonTableAdapter.Fill(this.db_QuanLyKhoCaPheDataSet.ChiTietHoaDon);
 
         }
 
@@ -38,13 +43,13 @@ namespace QuanLiQuanCafe
         {
             dtgvHoaDonXuat.DataSource = ctXuat.getThongTinPhieuXuat();
         }
-        void XoaPhieuNhap()
+        /*void XoaPhieuNhap()
         {
-            ChiTietPhieuNhap_DTO pn = new ChiTietPhieuNhap_DTO();
+            DTO_ChiTietDDH pn = new DTO_ChiTietDDH();
             try
             {
-                pn.IdNhap = txbID_N.Text;
-                pn.IdSP = txbIdSP_N.Text;
+                pn.MaDDH= txbID_N.Text;
+                pn.MaSP = txbIdSP_N.Text;
                 pn.SoLuong = Int32.Parse(txbSoLuong_N.Text);
                 pn.TenSP = txbTenSP_N.Text;
                 pn.NguonNhap = txbNguonNhap.Text;
@@ -72,22 +77,23 @@ namespace QuanLiQuanCafe
             {
                 MessageBox.Show("Dữ liệu không hợp lệ ");
             }
-        }
+        }*/
 
-        void ThemPhieuNhap()
+        /*void ThemPhieuNhap()
         {
-            ChiTietPhieuNhap_DTO pn = new ChiTietPhieuNhap_DTO();
+            DTO_ChiTietDDH pn = new DTO_ChiTietDDH();
+            DTO_DDH dh = new DTO_DDH();
             try
             {
-                pn.IdNhap = txbID_N.Text;
-                pn.IdSP = txbIdSP_N.Text;
-                pn.SoLuong = Int32.Parse(txbSoLuong_N.Text);
-                pn.TenSP = txbTenSP_N.Text;
-                pn.NguonNhap = txbNguonNhap.Text;
-                pn.DiaChi = txbDiaChi_N.Text;
+                pn.MaDDH = txtbMaDDH.Text;
+                pn.MaSP = txtbMaNNH.Text;
+                pn.SoLuong = Int32.Parse(txtbVAT_DDH.Text);
+                pn.DonGia = int.Parse(txtbTongCong_DDH.Text);
+                pn.ThanhTien = int.Parse(txtbNguonNhap.Text);
+                *//*pn.DiaChi = txbDiaChi_N.Text;
                 pn.NgayNhap = dtpNgayNhap.Value;
-                pn.SDT = txbSDT_N.Text;
-                if (ctNhap.themPhieuNhap(pn))
+                pn.SDT = txbSDT_N.Text;*//*
+                if (ctNhap.themPhieuNhap(pn, dh))
                 {
                     MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
                 }
@@ -97,61 +103,65 @@ namespace QuanLiQuanCafe
                 }
 
                 LoadThongTinPhieuNhap();
-                txbIdSP_N.Text = "";
-                txbID_N.Text = "";
-                txbTenSP_N.Text = "";
-                txbSoLuong_N.Text = "";
-                txbNguonNhap.Text = "";
-                txbDiaChi_N.Text = "";
-                txbSDT_N.Text = "";
+                txtbMaNNH.Text = "";
+                txtbMaDDH.Text = "";
+                txtbTongCong_DDH.Text = "";
+                txtbVAT_DDH.Text = "";
+                txtbNguonNhap.Text = "";
+                txtbSDT_DDH.Text = "";
+                txtbThanhTien_DDH.Text = "";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Dữ liệu không hợp lệ ");   
+                MessageBox.Show(ex.Message);   
             }
             
             
-        }
+        }*/
         void ClearThongTinChiTiet()
         {
-            txbID_N.DataBindings.Clear();
-            txbIdSP_N.DataBindings.Clear();
-            txbTenSP_N.DataBindings.Clear();
-            txbSoLuong_N.DataBindings.Clear();
+            txtbMaDDH.DataBindings.Clear();
+            txtbMaNNH.DataBindings.Clear();
+            txtbTongCong_DDH.DataBindings.Clear();
+            txtbVAT_DDH.DataBindings.Clear();
             dtpNgayNhap.DataBindings.Clear();
-            txbNguonNhap.DataBindings.Clear();
-            txbDiaChi_N.DataBindings.Clear();
-            txbSDT_N.DataBindings.Clear();
+            txtbNguonNhap.DataBindings.Clear();
+            txtbSDT_DDH.DataBindings.Clear();
+            txtbThanhTien_DDH.DataBindings.Clear();
 
         }
         void LoadThongTinChiTiet()
         {
             ClearThongTinChiTiet();
-            txbID_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Mã phiếu nhập"));
-            txbIdSP_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Mã sản phẩm"));
-            txbTenSP_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Tên sản phẩm"));
-            txbSoLuong_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Số lượng"));
-            dtpNgayNhap.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Ngày nhập"));
-            txbNguonNhap.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Nguồn nhập"));
-            txbDiaChi_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Địa chỉ"));
-            txbSDT_N.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Số điện thoại"));
+            txtbMaDDH.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Mã đơn đặt hàng"));
+            txtbMaNNH.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Mã nguồn nhập hàng"));
+            txtbTongCong_DDH.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Tổng cộng"));
+            txtbVAT_DDH.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "VAT"));
+            dtpNgayNhap.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Ngày đặt hàng"));
+            txtbNguonNhap.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "Nguồn nhập"));
+            txtbSDT_DDH.DataBindings.Add(new Binding("Text", dtgvHoaDonNhap.DataSource, "SDT"));
+            txtbThanhTien_DDH.DataBindings.Add(new Binding("Text",dtgvHoaDonNhap.DataSource, "Thành tiền" ));
 
         }
         
-        void ThemPhieuXuat()
+        /*void ThemPhieuXuat()
         {
-            ChiTietPhieuXuat_DTO pn =  new ChiTietPhieuXuat_DTO();
+            DTO_ChiTietHoaDon pn =  new DTO_ChiTietHoaDon();
+            DTO_HoaDon hd = new DTO_HoaDon();
             try
             {
-                pn.IdXuat = txtMPX.Text;
-                pn.IdNhap = txtMPN.Text;
-                pn.TenSP = txtTSP.Text;
+                pn.MaHD = txtMPX.Text;
+                pn.MaSP = txtMPN.Text;
+                pn.DonGia = float.Parse(txtTSP.Text);
                 pn.SoLuong = Int32.Parse(txtSL.Text);
-                pn.TenKH = txtKH.Text;
-                pn.DiaChi = txtDC.Text;
-                pn.NgayNhap = dTP.Value;
-                pn.SDT = txtSDT.Text;
-                if (ctXuat.themPhieuXuat(pn))
+                pn.ThanhTien = float.Parse(txtKH.Text);
+
+                hd.MaHD = pn.MaHD;
+                hd.MaKH = txtKH.Text;
+                hd.NgayHD = dTP.Value;
+                hd.TongTien = int.Parse(txtSL.Text) * int.Parse(txtTSP.Text);
+                
+                if (ctXuat.themPhieuXuat())
                 {
 
                     MessageBox.Show("Tạo phiếu nhập thành công", "Thông báo");
@@ -164,13 +174,13 @@ namespace QuanLiQuanCafe
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Dữ liệu không hợp lệ ");
+                MessageBox.Show(ex.Message);
             }
             
             
 
             
-        }
+        }*/
 
 
 
@@ -179,7 +189,7 @@ namespace QuanLiQuanCafe
         #region events
         private void icbNThem_Click(object sender, EventArgs e)
         {
-            ThemPhieuNhap();
+            //ThemPhieuNhap();
         }
         private void icbSearch_Click(object sender, EventArgs e)
         {
@@ -199,10 +209,7 @@ namespace QuanLiQuanCafe
         }
         #endregion
         
-        private void iconButton1_Click(object sender, EventArgs e)
-        {
-            ThemPhieuXuat();
-        }
+        
           
         private void icbNTimKiem_Click(object sender, EventArgs e)
         {
@@ -228,19 +235,41 @@ namespace QuanLiQuanCafe
 
         private void iconButtonRefresh_Click(object sender, EventArgs e)
         {
-            txbID_N.DataBindings.Clear();
-            txbIdSP_N.DataBindings.Clear();
-            txbTenSP_N.DataBindings.Clear();
-            txbSoLuong_N.DataBindings.Clear();
+            txtbMaDDH.DataBindings.Clear();
+            txtbMaNNH.DataBindings.Clear();
+            txtbTongCong_DDH.DataBindings.Clear();
+            txtbVAT_DDH.DataBindings.Clear();
             //tpNgayNhap.DataBindings.Clear();
-            txbNguonNhap.DataBindings.Clear();
-            txbDiaChi_N.DataBindings.Clear();
-            txbSDT_N.DataBindings.Clear();
+            txtbNguonNhap.DataBindings.Clear();
+            txtbSDT_DDH.DataBindings.Clear();
+            txtbThanhTien_DDH.DataBindings.Clear();
         }
 
         private void iconButtonDelete_Click(object sender, EventArgs e)
         {
-            XoaPhieuNhap();
+            //XoaPhieuNhap();
+        }
+
+        private void btnThemPhieuNhap_Click(object sender, EventArgs e)
+        {
+            Form fDatHang = new frmDatHang();
+            fDatHang.Show();
+        }
+
+        private void dtgvHoaDonNhap_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadThongTinChiTiet();
+        }
+
+        private void btnThemHD_Click(object sender, EventArgs e)
+        {
+           Form fHoaDon = new frmHoaDon();
+            fHoaDon.Show();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

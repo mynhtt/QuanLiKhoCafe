@@ -12,7 +12,7 @@ namespace QuanLiQuanCafe.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -30,6 +30,17 @@ namespace QuanLiQuanCafe.Properties {
         public string CafeInfoConnectionString {
             get {
                 return ((string)(this["CafeInfoConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TMY\\SQLEXPRESS;Initial Catalog=db_QuanLyKhoCaPhe;Integrated Security=" +
+            "True")]
+        public string db_QuanLyKhoCaPheConnectionString {
+            get {
+                return ((string)(this["db_QuanLyKhoCaPheConnectionString"]));
             }
         }
     }

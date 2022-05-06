@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DTO;
-using BUS;
+using BUS_QuanLiKhoCafe;
+using DTO_QuanLiKhoCafe;
+
 namespace QuanLiQuanCafe
 {   
      
@@ -33,10 +35,9 @@ namespace QuanLiQuanCafe
             txbID.DataBindings.Clear();
             txbTen.DataBindings.Clear();
             txbPrice.DataBindings.Clear();
-            nmSoLuong.DataBindings.Clear();
+            txtbSoLuong.DataBindings.Clear();
             txbCongThuc.DataBindings.Clear();
-            txbHuongVi.DataBindings.Clear();
-            txbGoiY.DataBindings.Clear();
+            txtbLoaiCF.DataBindings.Clear();    
         }
 
         void LoadThongTinChiTiet()
@@ -44,42 +45,37 @@ namespace QuanLiQuanCafe
             ClearThongTinChiTiet();
             txbID.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Mã sản phẩm"));
             txbTen.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Tên sản phẩm"));
-            txbPrice.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Giá Tiền"));
-            nmSoLuong.DataBindings.Add(new Binding("Value", dtgvData.DataSource, "Số lượng"));
-            txbCongThuc.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Công thức"));
-            txbHuongVi.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Hương vị"));
-            txbGoiY.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Gợi ý khách hàng"));
-            
+            txbPrice.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Giá mua"));
+            txtbSoLuong.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Số lượng"));
+            txbCongThuc.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Giá bán"));
+            txtbLoaiCF.DataBindings.Add(new Binding("Text", dtgvData.DataSource, "Loại cà phê"));
         }
 
         private void frmProducts_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'db_QuanLyKhoCaPheDataSet.LoaiCaPhe' table. You can move, or remove it, as needed.
+            this.loaiCaPheTableAdapter.Fill(this.db_QuanLyKhoCaPheDataSet.LoaiCaPhe);
             dtgvData.DataSource = buscafeinfo.getcafeinfo();
         }
 
-        void LuuThongTin()
+        /*void LuuThongTin()
         {
             try
             {
                 string id = txbID.Text;
-                string loaicf = cmbType.Text;
+                string loaicf = cmbLoaiCF.Text;
                 string ten = txbTen.Text;
-                float dongia = float.Parse(txbPrice.Text);
+                float giamua = float.Parse(txbPrice.Text);
                 float soluong = float.Parse(nmSoLuong.Value.ToString());
-                string congthuc = txbCongThuc.Text;
-                string huongvi = txbHuongVi.Text;
-                string goiy = txbGoiY.Text;
+                float giaban = float.Parse(txbCongThuc.Text);
 
-                DTO.cafeinfo edit = new cafeinfo();
+                DTO_CaPhe edit = new DTO_CaPhe();
 
-                edit.ID = id;
-                edit.cafeType = loaicf;
-                edit.cafeName = ten;
-                edit.cafePrice = dongia;
-                edit.cafeAmount = soluong;
-                edit.cafeNote = congthuc;
-                edit.cafeTaste = huongvi;
-                edit.cafeModify = goiy;
+                edit.MaSP = id;
+                edit.MaLoaiCF = loaicf;
+                edit.TenSP = ten;
+                edit.GiaMua = giamua;
+                edit.GiaBan = giaban;
 
                 if (buscafeinfo.updateCafeInfo(edit))
                 {
@@ -91,14 +87,14 @@ namespace QuanLiQuanCafe
                 MessageBox.Show("Có lỗi xảy ra", "Thông Báo");  
             }
             
-        }
+        }*/
 
-        void XoaThongTin()
+        /*void XoaThongTin()
         {
             string id = txbID.Text;
-            buscafeinfo.deleteCafeInfo(id);
+            //buscafeinfo.deleteCafeInfo(id);
             LoadCafeInfo();
-        }
+        }*/
 
         #endregion
 
@@ -106,7 +102,7 @@ namespace QuanLiQuanCafe
         //Xóa
         private void iconButtonDelete_Click(object sender, EventArgs e)
         {
-            XoaThongTin();
+            //XoaThongTin();
         }
 
         //Làm mới datagridview
@@ -119,7 +115,7 @@ namespace QuanLiQuanCafe
         //lưu sau khi sửa
         private void iconButtonSave_Click(object sender, EventArgs e)
         {
-            LuuThongTin();
+            //LuuThongTin();
             LoadCafeInfo();
         }
 
@@ -128,15 +124,15 @@ namespace QuanLiQuanCafe
         {
             if (chkbID.Checked)
             {
-                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("ID", txbTimKiem.Text);
+                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("MaSP", txbTimKiem.Text);
             }
             if (chkbType.Checked)
             {
-                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("cafeType", txbTimKiem.Text); //tìm kiếm theo loại cafe
+                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("MaLoaiCF", txbTimKiem.Text); //tìm kiếm theo loại cafe
             } 
             if (chkbName.Checked)
             {
-                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("cafeName", txbTimKiem.Text); //tìm kiếm theo tên sản phẩm
+                dtgvData.DataSource = buscafeinfo.SearchCafeinfo("TenSP", txbTimKiem.Text); //tìm kiếm theo tên sản phẩm
             } 
             if (chkbPrice.Checked)
             {
@@ -148,14 +144,12 @@ namespace QuanLiQuanCafe
         private void dtgvData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             LoadThongTinChiTiet();
-            FrmChiTietSanPham frmChiTietSanPham = new FrmChiTietSanPham();
-            frmChiTietSanPham.ShowDialog();
+            
         }
 
 
 
-        #endregion
 
-        
+        #endregion
     }
 }

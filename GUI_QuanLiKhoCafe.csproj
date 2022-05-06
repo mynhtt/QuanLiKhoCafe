@@ -50,21 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CafeInfoDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CafeInfoDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CafeInfoDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CafeInfoDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CafeInfoDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CafeInfoDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ChildForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,17 +61,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="db_QuanLyKhoCaPheDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_QuanLyKhoCaPheDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmBills.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBills.Designer.cs">
       <DependentUpon>frmBills.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmChiTietSanPham.cs">
+    <Compile Include="frmDatHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmChiTietSanPham.Designer.cs">
-      <DependentUpon>FrmChiTietSanPham.cs</DependentUpon>
+    <Compile Include="frmDatHang.Designer.cs">
+      <DependentUpon>frmDatHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHoaDon.Designer.cs">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -118,13 +114,22 @@
     <Compile Include="frmReport.Designer.cs">
       <DependentUpon>frmReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTaoHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaoHoaDon.Designer.cs">
+      <DependentUpon>frmTaoHoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmBills.resx">
       <DependentUpon>frmBills.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmChiTietSanPham.resx">
-      <DependentUpon>FrmChiTietSanPham.cs</DependentUpon>
+    <EmbeddedResource Include="frmDatHang.resx">
+      <DependentUpon>frmDatHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHoaDon.resx">
+      <DependentUpon>frmHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
@@ -155,39 +160,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <None Include="CafeInfoDataSet.xsc">
-      <DependentUpon>CafeInfoDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CafeInfoDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CafeInfoDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CafeInfoDataSet.xss">
-      <DependentUpon>CafeInfoDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CafeInfoDataSet1.xsc">
-      <DependentUpon>CafeInfoDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="CafeInfoDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CafeInfoDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CafeInfoDataSet1.xss">
-      <DependentUpon>CafeInfoDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="CafeInfoDataSet2.xsc">
-      <DependentUpon>CafeInfoDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="CafeInfoDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CafeInfoDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CafeInfoDataSet2.xss">
-      <DependentUpon>CafeInfoDataSet2.xsd</DependentUpon>
-    </None>
     <None Include="DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
@@ -195,6 +167,17 @@
     </None>
     <None Include="DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </None>
+    <None Include="db_QuanLyKhoCaPheDataSet.xsc">
+      <DependentUpon>db_QuanLyKhoCaPheDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="db_QuanLyKhoCaPheDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>db_QuanLyKhoCaPheDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="db_QuanLyKhoCaPheDataSet.xss">
+      <DependentUpon>db_QuanLyKhoCaPheDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CafeInfo.datasource" />
